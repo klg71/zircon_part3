@@ -16,14 +16,25 @@ class DisplayController(tileGrid: TileGrid, startPosition: Position) {
 
     private val snakeTile = snakeTile()
     private val blackTile = blackTile()
+    private val cherryTile = cherryTile()
 
     var snakePositions: List<Position> = listOf(startPosition)
 
     var oldSnakePosition = Optional.empty<Position>()
+    var cherryPosition = Optional.empty<Position>()
+    var oldCherryPosition = Optional.empty<Position>()
 
     fun draw() {
         oldSnakePosition.ifPresent {
             gameLayer.setTileAt(it, blackTile)
+        }
+
+        oldCherryPosition.ifPresent {
+            gameLayer.setTileAt(it, blackTile)
+        }
+
+        cherryPosition.ifPresent {
+            gameLayer.setTileAt(it, cherryTile)
         }
 
         snakePositions.forEach {
@@ -42,6 +53,12 @@ class DisplayController(tileGrid: TileGrid, startPosition: Position) {
         withBackgroundColor(ANSITileColor.BLACK)
         withForegroundColor(ANSITileColor.BLACK)
         withCharacter(' ')
+    }
+
+    private fun cherryTile() = tileBuilder {
+        withBackgroundColor(ANSITileColor.RED)
+        withForegroundColor(ANSITileColor.WHITE)
+        withCharacter('c')
     }
 }
 

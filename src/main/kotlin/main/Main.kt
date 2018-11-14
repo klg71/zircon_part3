@@ -8,6 +8,7 @@ import org.hexworks.zircon.api.builder.application.AppConfigBuilder
 
 fun main(args: Array<String>) {
 
+    val size = Sizes.create(30, 20)
     val grid = SwingApplications.startTileGrid(
             tileConfig {
                 withSize(Sizes.create(30, 20))
@@ -18,7 +19,7 @@ fun main(args: Array<String>) {
 
     DisplayController(grid, startPosition).apply {
 
-        GameController(this, startPosition).apply {
+        GameController(this, startPosition, size).apply {
             grid.onKeyStroke(GameInputListener(this::directionChanged))
         }
     }
