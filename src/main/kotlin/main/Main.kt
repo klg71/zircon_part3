@@ -19,11 +19,7 @@ fun main(args: Array<String>) {
     DisplayController(grid, startPosition).apply {
 
         GameController(this, startPosition).apply {
-            grid.onKeyStroke(GameInputListener(this::move))
-        }
-
-        while (true) {
-            draw()
+            grid.onKeyStroke(GameInputListener(this::directionChanged))
         }
     }
 

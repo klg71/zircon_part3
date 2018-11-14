@@ -17,19 +17,18 @@ class DisplayController(tileGrid: TileGrid, startPosition: Position) {
     private val snakeTile = snakeTile()
     private val blackTile = blackTile()
 
-    var snakePosition = startPosition
-        set(value) {
-            oldSnakePosition = Optional.of(snakePosition)
-            field = value
-        }
+    var snakePositions: List<Position> = listOf(startPosition)
 
-    private var oldSnakePosition = Optional.empty<Position>()
+    var oldSnakePosition = Optional.empty<Position>()
 
     fun draw() {
         oldSnakePosition.ifPresent {
             gameLayer.setTileAt(it, blackTile)
         }
-        gameLayer.setTileAt(snakePosition, snakeTile)
+
+        snakePositions.forEach {
+            gameLayer.setTileAt(it, snakeTile)
+        }
         gameScreen.display()
     }
 
